@@ -4,6 +4,10 @@ let authFormTitle = document.getElementById('title');
 console.log(authFormTitle);
 let register = document.getElementById('register');
 let access = document.getElementById('access');
+let loading = document.getElementById('loading');
+let auth = document.getElementById('auth');
+let userContent = document.getElementById('userContent');
+let userEmail = document.getElementById('userEmail');
 
 
 
@@ -32,4 +36,19 @@ function ShowItem(element){
 
 function hideItem(element){
   element.style.display = 'none';
+}
+
+function showUserContent(user){
+  console.log(user.email)
+  userEmail.innerHTML = user.email+'';
+  hideItem(auth);
+  ShowItem(userContent);
+  
+}
+
+function showAuth(){
+  authForm.email.value = '';
+  authForm.Password.value = '';
+  hideItem(userContent);
+  ShowItem(auth);
 }
