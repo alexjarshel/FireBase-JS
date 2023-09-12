@@ -1,3 +1,6 @@
+//traduz para Portuguess
+firebase.auth().languageCode = 'pt=BR'
+
 authForm.onsubmit = function (event) {
   ShowItem(loading);
   event.preventDefault();
@@ -17,9 +20,6 @@ authForm.onsubmit = function (event) {
   }
 }
 
-firebase.auth().signOut().then(function(){
-})
-
 // on change
 firebase.auth().onAuthStateChanged(function (user) {
   hideItem(loading);
@@ -35,5 +35,49 @@ firebase.auth().onAuthStateChanged(function (user) {
 function signOut(){
   firebase.auth().signOut().catch(function(error){
     console.log(error);
+  })
+}
+
+//funcão que verfiica o email
+
+function sendEmailVerification(){
+  ShowItem(loading);
+  let user = firebase.auth().currentUser
+  user.sendEmailVerification(actionCodeSettings).then(function (){
+    alert('email de verificação foi enviado para '+ user.email);
+  }).catch(function (error){
+    alert('erro ao enviar o email');
+    console.log(error);
+  }).finally(function(){
+    hideItem(loading);
+  })
+}
+
+//passwordReset
+
+function sendPassswordReset(){
+  let email = prompt("redefinir senha! informe seu endereço de email", authForm.email.value);
+  if(email){
+    ShowItem(loading);
+    firebase.auth().sendPasswordResetEmail(email, actionCodeSettings).then(function(){
+      alert('email enviado para a sua caixa');
+    }).catch((error) => {
+      alert(error);
+    }).finally(()=>{
+      hideItem(loading);
+    })
+  }else{
+    alert('prencha o email');
+  }
+}
+
+//google auth
+
+function signWithGoogle(){
+  ShowItem(loading)
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function (error){
+    alert('houve um erro inesperado');
+    console.log(error);
+    hideItem(loading);
   })
 }

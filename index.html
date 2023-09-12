@@ -33,24 +33,41 @@
                 
                 <button type="submit" id="submitAuthForm">Acessar</button>
 
+                 <!---password reeset-->
+                <p id="passwordReset">
+                    Esqueceu a senha?
+                    <button type="button" onclick="sendPassswordReset()" class="alternative">redefinir senha</button>
+                </p>
+
                 <p id="register">
                     Não possui uma conta?
                     <button type="button" onclick="toggleToRegister()" class="alternative">Cadastrar uma nova conta!</button>
                 </p>
-
+                
                 <p id="access" class="start-hidden">
                     Ja possui uma conta?
                     <button type="button" onclick="toggleToAccess()" class="alternative">Acessar uma conta!</button>
                 </p>
 
+                <p>
+                    ou Acesse usando:<br>
+                    <img src="img/google.png" alt="logo do google" onclick="signWithGoogle()">
+                </p>
+
            </form> 
         </div>
 
-        <!---usuarios autenticados-->
+        <!---usuarios autenticados--> <!---usuarios autenticados-->
         <div id="userContent" class="start-hidden">
             <hr>
             <div id="userInfo" class="center">
+                <img id="userImg">
+                <p id="userName"></p>
                 <p id='userEmail'></p>
+                <p id="emailVerified"></p>
+                <div id="sendEmailVerificationDiv">
+                    <button class="alternative" onclick="sendEmailVerification()">Verificar Email</button>
+                </div>
                 <button class="alternative" onclick="signOut()">Sair</button>
             </div>
         </div>
