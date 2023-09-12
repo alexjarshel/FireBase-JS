@@ -81,3 +81,47 @@ function signWithGoogle(){
     hideItem(loading);
   })
 }
+
+function signWithGithub(){
+  ShowItem(loading)
+  firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).catch(function (error){
+    alert('houve um erro inesperado');
+    console.log(error);
+    hideItem(loading);
+  })
+}
+
+// change userinfo
+
+function updateUserName(){
+  let newUserName = prompt('informe o novo nome')
+  if(newUserName){
+    ShowItem(loading);
+    userName.innerHTML = newUserName;
+    firebase.auth().currentUser.updateProfile({
+      displayName: newUserName
+    }).catch(function (error){
+      console.log(error);
+      alert('não foi possivel alterar o nome');
+      hideItem(loading);
+    }).finally(()=>{
+      hideItem(loading);
+    })
+  }
+}
+
+//delete user
+
+function deleteUser(){
+  var confirmation = confirm('Deseja excluir sua conta?')
+  if(confirmation){
+    ShowItem(loading);
+    firebase.auth().currentUser.delete().then(function (){
+      alert('conta excluida!')
+    }).catch(function(){
+      alert('não foi possivel remover a conta');
+    }).finally(()=>{
+      hideItem(loading);
+    })
+  }
+}
